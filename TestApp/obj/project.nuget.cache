@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "DoLVjamh255HP3jqwEeN2KtDsSp6IGqESpDONrCm1VqrSDzBnNQI+QU8W6RTjRbu4Bga/sHb3/hIf/pf5Dd3pw==",
+  "success": true,
+  "projectFilePath": "/home/onkel/winempStudio/W83P/TestApp/TestApp.csproj",
+  "expectedPackageFiles": [
+    "/home/onkel/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
