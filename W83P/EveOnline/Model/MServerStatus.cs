@@ -18,7 +18,7 @@ namespace W83P.EveOnline.Model
         }
         public string SpielerZahl{
             get => _SpielerZahl + "";
-            set => Konstanten.StringToInt(value);
+            set => _SpielerZahl = Konstanten.StringToInt(value);
         }
         public string StartZeit{
             get => _StartZeit;

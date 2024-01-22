@@ -75,11 +75,9 @@ namespace W83P.Basic
                 foreach (var property in jObject.Properties()) {
                     string propertyName = property.Name;
                     JToken propertyValue = property.Value;
-
-                    Console.WriteLine($"Property: {propertyName}, Value: {propertyValue}");
-
                     // Wenn der Wert ein weiteres JObject oder JArray ist, rufen Sie die Funktion rekursiv auf
                     IterateThroughJToken(propertyValue);
+                    InsertIntoClass(propertyName, propertyValue.ToString());
                 }
             } else if (jToken is JArray jArray) {
                 foreach (JToken nestedToken in jArray) {

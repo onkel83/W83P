@@ -22,3 +22,4 @@ C:/Users/koehn/source/repos/W83P/W83P/obj/Debug/net7.0/W83P.csproj.AssemblyRefer
 /home/onkel/winempStudio/W83P/W83P/obj/Debug/net7.0/refint/W83P.dll
 /home/onkel/winempStudio/W83P/W83P/obj/Debug/net7.0/W83P.pdb
 /home/onkel/winempStudio/W83P/W83P/obj/Debug/net7.0/ref/W83P.dll
+/home/onkel/winempStudio/W83P/W83P/obj/Debug/net7.0/W83P.sourcelink.json

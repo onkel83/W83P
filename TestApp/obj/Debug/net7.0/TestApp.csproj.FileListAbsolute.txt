@@ -36,3 +36,4 @@ C:/Users/koehn/source/repos/W83P/TestApp/bin/Debug/net7.0/Newtonsoft.Json.dll
 /home/onkel/winempStudio/W83P/TestApp/obj/Debug/net7.0/TestApp.pdb
 /home/onkel/winempStudio/W83P/TestApp/obj/Debug/net7.0/TestApp.genruntimeconfig.cache
 /home/onkel/winempStudio/W83P/TestApp/obj/Debug/net7.0/ref/TestApp.dll
+/home/onkel/winempStudio/W83P/TestApp/obj/Debug/net7.0/TestApp.sourcelink.json

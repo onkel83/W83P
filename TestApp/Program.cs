@@ -1,8 +1,19 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Windows.Markup;
 using Newtonsoft.Json.Linq;
 using W83P.Basic;
+using W83P.EveOnline;
+using W83P.EveOnline.OnlineData;
 
 Console.WriteLine("Hello, nice to meet you");
+
+VMServerStatus _vMSS = new VMServerStatus();
+_vMSS.IterateThroughJToken(await _vMSS.GetJsonFromUrlAsync(Konstanten.GetValueByKey("Status")));
+Console.WriteLine($"Folgendes Objekt ist geparsst worden : ");
+Console.WriteLine($"Server Startzeit : {_vMSS.Value.StartZeit}");
+Console.WriteLine($"Server Spieler   : {_vMSS.Value.SpielerZahl}");
+Console.WriteLine($"Server Version   : {_vMSS.Value.ServerVersion}");
+
 
 /*  SerialisationHelper httpClientHelper = new SerialisationHelper<W83P.Modelle.Basic>();
     string url = "https://esi.evetech.net/latest/status/?datasource=tranquility"; // Ersetzen Sie dies durch Ihre eigene URL
