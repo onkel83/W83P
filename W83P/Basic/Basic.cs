@@ -2,6 +2,7 @@
 
 namespace W83P.Modelle
 {
+    [Serializable]
     public abstract class Basic
     {
         private int _id;

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using W83P.Modelle;
 using W83P.Logging;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace W83P.Basic
 {
@@ -27,7 +28,7 @@ namespace W83P.Basic
             { "RXml", "R.xml" },
             { "MPXml", "MP.xml" },
             { "JXml", "J.xml" },
-            { "SysXml", "Sys.xml" }
+            { "Sys", "Sys.bin" }
         };
 
         public static string GetValueByKey(string key)
@@ -93,6 +94,24 @@ namespace W83P.Basic
                 WriteError(LogLevel.Error, ex.Message);
             }
             return "00:00 01.01.2024";
+        }
+
+        public static void SaveObject<T>(T obj, string filePath){
+            using (Stream stream = File.Open(filePath, FileMode.Create)){
+                BinaryFormatter formatter = new BinaryFormatter();
+                #pragma warning disable SYSLIB0011, CS8604 
+                formatter.Serialize(stream, obj);
+                #pragma warning restore SYSLIB0011, CS8604 // Type or member is obsolete
+            }
+        }
+
+        public static T LoadObject<T>(string filePath){
+            using (Stream stream = File.Open(filePath, FileMode.Open)) {
+                BinaryFormatter formatter = new BinaryFormatter();
+                #pragma warning disable SYSLIB0011 // Type or member is obsolete
+                return (T)formatter.Deserialize(stream);
+                #pragma warning restore SYSLIB0011 // Type or member is obsolete
+            }
         }
     }
 }

@@ -9,10 +9,13 @@ Console.WriteLine("Hello, nice to meet you");
 
 VMServerStatus _vMSS = new VMServerStatus();
 _vMSS.IterateThroughJToken(await _vMSS.GetJsonFromUrlAsync(Konstanten.GetValueByKey("Status")));
-Console.WriteLine($"Folgendes Objekt ist geparsst worden : ");
-Console.WriteLine($"Server Startzeit : {_vMSS.Value.StartZeit}");
-Console.WriteLine($"Server Spieler   : {_vMSS.Value.SpielerZahl}");
-Console.WriteLine($"Server Version   : {_vMSS.Value.ServerVersion}");
+_vMSS.AddToValues();
+_vMSS.Save();
+Console.WriteLine($"Es sind Momentan : {_vMSS.Values.Count()} Einträge gespeichert !"); 
+_vMSS.Values.Clear();
+Console.WriteLine($"Es sind Momentan : {_vMSS.Values.Count()} Einträge gespeichert !"); 
+_vMSS.Load();
+Console.WriteLine($"Es sind Momentan : {_vMSS.Values.Count()} Einträge gespeichert !"); 
 
 
 /*  SerialisationHelper httpClientHelper = new SerialisationHelper<W83P.Modelle.Basic>();

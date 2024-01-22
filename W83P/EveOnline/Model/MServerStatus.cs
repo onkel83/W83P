@@ -7,6 +7,7 @@ using W83P.Basic;
 
 namespace W83P.EveOnline.Model
 {
+    [Serializable]
     public class MServerStatus : Modelle.Basic{
         private string _ServerVersion = "";
         private int _SpielerZahl;

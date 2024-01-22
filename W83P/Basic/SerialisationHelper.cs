@@ -9,11 +9,13 @@ using W83P.Basic;
 
 namespace W83P.Basic
 {
-    public abstract class SerialisationHelper<T>
-    {
+    public abstract class SerialisationHelper<T>{
+        public string FileName { get => fileName; set => fileName = value; }
+
         private static readonly HttpClient client = new HttpClient();
         private T? _Value;
         private List<T>? _Values = null;
+        private string fileName = "";
 
         public T Value {
         #pragma warning disable CS8603 // Possible null reference return.
@@ -24,6 +26,7 @@ namespace W83P.Basic
 
         public List<T> Values {
             get => (_Values != null)?_Values: new List<T>();
+            set => _Values = value;
         }
 
         public async Task<JToken> GetJsonFromUrlAsync(string url)
@@ -87,5 +90,7 @@ namespace W83P.Basic
         }
 
         public abstract void InsertIntoClass(string propertyName,string  propertyValue);
+        public abstract void Save();
+        public abstract void Load();
     }
 }
