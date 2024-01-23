@@ -10,7 +10,7 @@ namespace W83P.Modelle
         public string ID
         {
             get => _id + "";
-            set => _id = Konstanten.StringToInt(value);
+            set => _id = Helper.StringToInt(value);
         }
     }
 }

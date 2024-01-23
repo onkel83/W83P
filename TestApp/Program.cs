@@ -8,15 +8,22 @@ using W83P.EveOnline.OnlineData;
 Console.WriteLine("Hello, nice to meet you");
 
 VMServerStatus _vMSS = new VMServerStatus();
+_vMSS.Load();
+Console.WriteLine($"Es sind Momentan : {_vMSS.Values.Count()} Einträge gespeichert !"); 
 _vMSS.IterateThroughJToken(await _vMSS.GetJsonFromUrlAsync(Konstanten.GetValueByKey("Status")));
 _vMSS.AddToValues();
 _vMSS.Save();
-Console.WriteLine($"Es sind Momentan : {_vMSS.Values.Count()} Einträge gespeichert !"); 
 _vMSS.Values.Clear();
 Console.WriteLine($"Es sind Momentan : {_vMSS.Values.Count()} Einträge gespeichert !"); 
 _vMSS.Load();
 Console.WriteLine($"Es sind Momentan : {_vMSS.Values.Count()} Einträge gespeichert !"); 
-
+foreach(W83P.EveOnline.Model.MServerStatus _mss in _vMSS.Values){
+    Console.WriteLine($"ServerStatus ID  : {_mss.ID}");
+    Console.WriteLine($"Server Version   : {_mss.ServerVersion}");
+    Console.WriteLine($"Server Startzeit : {_mss.StartZeit}");
+    Console.WriteLine($"Server Spieler   : {_mss.SpielerZahl}");
+    Console.WriteLine("####################################################################");
+}
 
 /*  SerialisationHelper httpClientHelper = new SerialisationHelper<W83P.Modelle.Basic>();
     string url = "https://esi.evetech.net/latest/status/?datasource=tranquility"; // Ersetzen Sie dies durch Ihre eigene URL

@@ -12,7 +12,7 @@ namespace W83P.EveOnline.OnlineData
         public VMServerStatus(){
             Value = new Model.MServerStatus();
             Values = new List<Model.MServerStatus>();
-            FileName =  Konstanten.GetValueByKey("AppPath")+Konstanten.GetValueByKey("Sys");
+            FileName =  Konstanten.GetValueByKey("AppPath")+Konstanten.GetValueByKey("SysBin");
         }
         public override void InsertIntoClass(string propertyName, string propertyValue)
         {
@@ -24,18 +24,36 @@ namespace W83P.EveOnline.OnlineData
             }
         }
         public override void Save(){
-            Konstanten.SaveObject<List<Model.MServerStatus>>(Values, FileName);
+            FileHelper.SaveObject<List<Model.MServerStatus>>(Values, FileName);
         }
         public override void Load(){
             Values.Clear();
-            foreach(MServerStatus mss in Konstanten.LoadObject<List<Model.MServerStatus>>(FileName)){
-                Values.Add(mss);
+            Values = new();
+            foreach(Model.MServerStatus mss in FileHelper.LoadObject<List<Model.MServerStatus>>(FileName)){
+                Value = new MServerStatus{ 
+                    ID = mss.ID,
+                    ServerVersion = mss.ServerVersion,
+                    StartZeit = mss.StartZeit,
+                    SpielerZahl = mss.SpielerZahl
+                };
+                Values.Add(Value);
             }
         }
 
         public void AddToValues(){
+            Value.ID = (Values.Count() + 1).ToString();
             Values.Add(Value);
             Value = new();
+        }
+
+        public override void AddToXML()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void LoadFromXML()
+        {
+            throw new NotImplementedException();
         }
     }
 }
