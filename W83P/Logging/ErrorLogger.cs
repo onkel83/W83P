@@ -22,7 +22,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using W83P.Basic;
 
 namespace W83P.Logging
 {
@@ -33,7 +32,7 @@ namespace W83P.Logging
 
         private ErrorLogger()
         {
-            filePath = Konstanten.GetValueByKey("AppPath") + Konstanten.GetValueByKey("Error");
+            filePath = AppDomain.CurrentDomain.BaseDirectory + ".xml";
         }
 
         public static void Initialize()
