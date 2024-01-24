@@ -1,12 +1,22 @@
 ﻿using System;
 using W83P.AppSettings.Model;
-Console.WriteLine("TestConsole");
-/*
-MAppSettings.SetSetting("ErrorXml", AppDomain.CurrentDomain.BaseDirectory + "error.xml");
-MAppSettings.SetSetting("ErrorBin", AppDomain.CurrentDomain.BaseDirectory + "error.bin");
+using W83P.Basic;
+using W83P.EveOnline.Model;
+using W83P.EveOnline.ViewModel;
+Console.WriteLine("TestConsole : ");
+
+MAppSettings.LoadSettingsBin("settings.bin");
+MAppSettings.SetSetting("EOServerStatusBin", AppDomain.CurrentDomain.BaseDirectory + "EOServerStatus.bin");
 
 MAppSettings.SaveSettingsBin("settings.bin");
-*/
-MAppSettings.LoadSettingsBin("settings.bin");
-Console.WriteLine($"Key : ErrorXml ; Value : {MAppSettings.GetSetting("ErrorXml")}");
-Console.WriteLine($"Key : ErrorBin ; Value : {MAppSettings.GetSetting("ErrorBin")}");
+
+HttpHelper hh = new HttpHelper();
+string result = await hh.SendGetRequestAsync(MAppSettings.GetSetting("ServerStatusUrl"));
+VMServerStatus vM = new VMServerStatus();
+await vM.AddJsonObjectToListAsync(result);
+foreach(MServerStatus mss in vM.Items){
+    Console.WriteLine($"Spieler        : {mss.Players}");
+    Console.WriteLine($"Server Version : {mss.Server_Version.ToString()}");
+    Console.WriteLine($"Server Start   : {mss.Start_Time.ToUniversalTime()}");
+}
+vM.SaveToFile(MAppSettings.GetSetting("EOServerStatusBin"));

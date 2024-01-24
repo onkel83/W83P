@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("W83P")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+76b49a20a4ef278cc9af1b1a3d41a0e468231b3d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+031ac7ddbfa6d7562bb878f3aa1ab611f838eee7")]
 [assembly: System.Reflection.AssemblyProductAttribute("W83P")]
 [assembly: System.Reflection.AssemblyTitleAttribute("W83P")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

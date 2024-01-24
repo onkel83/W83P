@@ -10,6 +10,19 @@ using System.Xml.Serialization;
 
 namespace W83P.AppSettings.Model
 {
+
+    /*
+     * Using of Class :
+     * using W83P.AppSettings.Model;
+     *
+     * MAppSettings.LoadSettingsXml(string Path to Xml File); // To Load from a Xml File
+     * MAppSettings.LoadSettingsBin(string Path to bin File); // To Load from a Bin File
+     * string setting = MAppSettings.GetSetting(string key);  // To Get a Value from Key
+     * MAppSettings.SetSettings(string key, string value);    // To Store a Key:Value Pait
+     * MAppSettings.SaveSettingsXml(string Path to Xml File); // Save in to a Xml File
+     * MAppSettings.SaveSettingsBin(string Path to bin File); // Save in to a Bin File
+     *
+     */
     public class MAppSettings{
         #region Private Members
         private static Dictionary<string, string> _settings;
