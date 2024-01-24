@@ -34,7 +34,7 @@ namespace W83P.EveOnline.ViewModel
         }
 
         public void LoadFromFile(string file){
-            using (var fileStream = new FileStream("server_status.bin", FileMode.Open)){
+            using (var fileStream = new FileStream(file, FileMode.Open)){
                 var binaryData = new byte[fileStream.Length];
                 fileStream.Read(binaryData, 0, binaryData.Length);
                 Items = BinarySerializer<ObservableCollection<MServerStatus>>.Deserialize(binaryData);

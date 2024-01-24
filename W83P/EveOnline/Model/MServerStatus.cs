@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace W83P.EveOnline.Model
 {
+    [Serializable]
     public class MServerStatus
     {
         public int Players { get; set; }

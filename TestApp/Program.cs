@@ -6,13 +6,14 @@ using W83P.EveOnline.ViewModel;
 Console.WriteLine("TestConsole : ");
 
 MAppSettings.LoadSettingsBin("settings.bin");
-MAppSettings.SetSetting("EOServerStatusBin", AppDomain.CurrentDomain.BaseDirectory + "EOServerStatus.bin");
+//MAppSettings.SetSetting("EOServerStatusBin", AppDomain.CurrentDomain.BaseDirectory + "EOServerStatus.bin");
 
-MAppSettings.SaveSettingsBin("settings.bin");
+//MAppSettings.SaveSettingsBin("settings.bin");
 
 HttpHelper hh = new HttpHelper();
 string result = await hh.SendGetRequestAsync(MAppSettings.GetSetting("ServerStatusUrl"));
 VMServerStatus vM = new VMServerStatus();
+vM.LoadFromFile(MAppSettings.GetSetting("EOServerStatusBin"));
 await vM.AddJsonObjectToListAsync(result);
 foreach(MServerStatus mss in vM.Items){
     Console.WriteLine($"Spieler        : {mss.Players}");
