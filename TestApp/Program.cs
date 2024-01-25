@@ -7,10 +7,11 @@ using W83P.EveOnline.ViewModel;
 Console.WriteLine("TestConsole : ");
 
 MAppSettings.LoadSettingsBin("settings.bin");
-//MAppSettings.SetSetting("EOServerStatusBin", AppDomain.CurrentDomain.BaseDirectory + "EOServerStatus.bin");
+//MAppSettings.SetSetting("EOMarktPriceBin", AppDomain.CurrentDomain.BaseDirectory + "EOMarktPrice.bin");
+//MAppSettings.SetSetting("MarktPriceUrl", "https://esi.evetech.net/latest/markets/prices/?datasource=tranquility");
 
 //MAppSettings.SaveSettingsBin("settings.bin");
-
+/*
     System.Timers.Timer timer = new System.Timers.Timer(5 * 60 * 1000);
 
         // Define the function that will be called when the timer triggers
@@ -23,7 +24,14 @@ MAppSettings.LoadSettingsBin("settings.bin");
     while (Console.In.ReadLine().Length < 0) { 
     
     }
-
+*/
+HttpHelper hh = new HttpHelper();
+    string result = await hh.SendGetRequestAsync(MAppSettings.GetSetting("MarktPriceUrl"));
+    VMServerStatus vM = new VMServerStatus();
+    //vM.LoadFromFile(MAppSettings.GetSetting("EOServerStatusBin"));
+    await vM.AddJsonObjectToListAsync(result);
+    Console.WriteLine($"Einträge : {vM.Items.Count} zu letzt geupdatet um {DateTime.Now}");
+    vM.SaveToFile(MAppSettings.GetSetting("EOMarktPriceBin"));
 
 static async void GetServerStatus(object source, ElapsedEventArgs e){
     DoTheMagic();
