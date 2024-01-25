@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Timers;
 using W83P.AppSettings.Model;
 using W83P.Basic;
 using W83P.EveOnline.Model;
@@ -10,14 +11,30 @@ MAppSettings.LoadSettingsBin("settings.bin");
 
 //MAppSettings.SaveSettingsBin("settings.bin");
 
-HttpHelper hh = new HttpHelper();
-string result = await hh.SendGetRequestAsync(MAppSettings.GetSetting("ServerStatusUrl"));
-VMServerStatus vM = new VMServerStatus();
-vM.LoadFromFile(MAppSettings.GetSetting("EOServerStatusBin"));
-await vM.AddJsonObjectToListAsync(result);
-foreach(MServerStatus mss in vM.Items){
-    Console.WriteLine($"Spieler        : {mss.Players}");
-    Console.WriteLine($"Server Version : {mss.Server_Version.ToString()}");
-    Console.WriteLine($"Server Start   : {mss.Start_Time.ToUniversalTime()}");
+    System.Timers.Timer timer = new System.Timers.Timer(5 * 60 * 1000);
+
+        // Define the function that will be called when the timer triggers
+    timer.Elapsed += new ElapsedEventHandler(GetServerStatus);
+
+        // Start the timer
+    timer.Start();
+    DoTheMagic();
+        // Wait for the user to press a key
+    while (Console.In.ReadLine().Length < 0) { 
+    
+    }
+
+
+static async void GetServerStatus(object source, ElapsedEventArgs e){
+    DoTheMagic();
 }
-vM.SaveToFile(MAppSettings.GetSetting("EOServerStatusBin"));
+
+static async void DoTheMagic(){
+    HttpHelper hh = new HttpHelper();
+    string result = await hh.SendGetRequestAsync(MAppSettings.GetSetting("ServerStatusUrl"));
+    VMServerStatus vM = new VMServerStatus();
+    vM.LoadFromFile(MAppSettings.GetSetting("EOServerStatusBin"));
+    await vM.AddJsonObjectToListAsync(result);
+    Console.WriteLine($"Einträge : {vM.Items.Count} zu letzt geupdatet um {DateTime.Now}");
+    vM.SaveToFile(MAppSettings.GetSetting("EOServerStatusBin"));
+}
